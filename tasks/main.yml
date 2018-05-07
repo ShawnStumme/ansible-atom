@@ -1,2 +1,23 @@
 ---
 # tasks file for atom
+
+# Add Atom apt key
+- name: Add Atom apt key from packagecloud.io
+  apt_key:
+    url: https://packagecloud.io/AtomEditor/atom/gpgkey
+    state: present
+
+- name: Add Atom repository
+  apt_repository:
+    repo: deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main
+    state: present
+    update_cache: yes
+
+- name: Update the cache and install the latest version of Atom
+  apt:
+    name: atom
+    state: latest
+    update_cache: true
+
+#end
+...
